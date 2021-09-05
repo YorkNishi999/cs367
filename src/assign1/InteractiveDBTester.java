@@ -35,7 +35,7 @@ public class InteractiveDBTester {
         	String tmp;
         	String[] em;
         	try {
-        		fr = new FileReader("/home/yohei-pana/project/eclipse-workspace/CS367/assgin1/assign1/emp.txt");
+        		fr = new FileReader("/home/yohei-pana/project/eclipse-workspace/CS367/src/assign1/emp.txt");
         		br = new BufferedReader(fr);
         		
         		while((tmp = br.readLine() ) != null) {
