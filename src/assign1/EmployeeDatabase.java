@@ -16,8 +16,8 @@ public class EmployeeDatabase {
 	private static ArrayList<Employee> edb = new ArrayList<>();
 	
 	// Constructor
-	public EmployeeDatabase() {	
-	}
+//	public EmployeeDatabase() {	
+//	}
 
 	// methods
 	public void addEmployee(String e) {
@@ -32,7 +32,7 @@ public class EmployeeDatabase {
 		// 2. あれば→そこでBreak
 		// 3. なければ→最後にUserを追加する
 		for ( int i = 0; i < edb.size(); ++i ) {
-			if ( edb.get(i).getUsername() == e ) {
+			if ( edb.get(i).getUsername().equals(e) ) {
 				return;
 			}
 		}
@@ -83,7 +83,7 @@ public class EmployeeDatabase {
 			throw new java.lang.IllegalArgumentException();
 		}
 		for ( int i = 0; i < edb.size(); ++i ) {
-			if ( edb.get(i).getUsername() == e ) {
+			if ( edb.get(i).getUsername().equals(e) ) {
 				return true;
 			}
 		}
@@ -96,6 +96,8 @@ public class EmployeeDatabase {
 		if (d == null) {
 			throw new java.lang.IllegalArgumentException();
 		}
+		
+		System.out.println("contains function called");
 		
 		for ( int i = 0; i < edb.size(); ++i ) {
 			for (int j = 0; j < edb.get(i).getWishlist().size(); ++j) {

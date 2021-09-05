@@ -52,8 +52,9 @@ public class InteractiveDBTester {
         	}
         	
         	System.out.println("db size is ");
-        	System.out.println(EmployeeDB.size());
-        	System.out.println(".");
+        	//System.out.println(EmployeeDB.size());
+        	System.out.println(".....................");
+        	System.out.println(EmployeeDB.containsEmployee("MickeyMouse"));
        } // end of populateDB
 
      static boolean GUIactive;  //is GUI tester active?
