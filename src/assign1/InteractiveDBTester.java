@@ -41,7 +41,8 @@ public class InteractiveDBTester {
         		while((tmp = br.readLine() ) != null) {
         			System.out.println(tmp);
         			em = tmp.split(",");
-        			System.out.println(em[0]);
+//        			System.out.println(em[0]);
+//        			System.out.println(em[1]);
         			EmployeeDB.addEmployee(em[0]);
         			for (int i = 1; i < em.length; ++i) {
         				EmployeeDB.addDestination(em[0], em[i]);
@@ -51,10 +52,14 @@ public class InteractiveDBTester {
         		System.out.println(e);
         	}
         	
-        	System.out.println("db size is ");
+//        	System.out.println("db size is ");
         	//System.out.println(EmployeeDB.size());
-        	System.out.println(".....................");
+//        	System.out.println(".....................");
         	System.out.println(EmployeeDB.containsEmployee("MickeyMouse"));
+        	String a = "NRT";
+        	System.out.println(EmployeeDB.containsDestination(a));
+        	EmployeeDB.printEmployee();
+        	
        } // end of populateDB
 
      static boolean GUIactive;  //is GUI tester active?
@@ -72,7 +77,7 @@ public class InteractiveDBTester {
     		return msg;
     	}
     	System.out.println("no found!");
-    	return "Notiong find";
+    	return "Nothing find";
     }
 
     protected static String pushDiscontinue(String destination){
@@ -80,6 +85,15 @@ public class InteractiveDBTester {
           The supplied destination is removed from the wish lists
            of all employees in the employee database
        */
+    	if(EmployeeDB.removeDestination(destination)) {
+    		System.out.println("remove dest done.");
+        	EmployeeDB.printEmployee();
+    		return "remove done";
+    	} else {
+    		System.out.println("remove dest undone.");
+        	EmployeeDB.printEmployee();
+    		return "remove false";
+    	}	
     }
 
     protected static String pushSearch(String destination){
@@ -87,24 +101,44 @@ public class InteractiveDBTester {
            Search the employee database for all employees who have
             the supplied destination in their wish list
        */
+    	if(EmployeeDB.containsDestination(destination)) {
+    		System.out.println("Find destination.");
+        	EmployeeDB.printEmployee();
+    		return "Find destination";
+    	} else {
+    		System.out.println("Not Find destination.");
+        	EmployeeDB.printEmployee();
+    		return "Not Find destination";
+    	}	
     }
 
     protected static String pushRemove(String employee){
-       /* Code to implement remone command goes here:
+       /* Code to implement remove command goes here:
           Remove the supplied employee from the employee database
        */
+    	if(EmployeeDB.removeEmployee(employee)) {
+    		System.out.println("remove employee done.");
+        	EmployeeDB.printEmployee();
+    		return "remove em done";
+    	} else {
+    		System.out.println("remove employee undone.");
+        	EmployeeDB.printEmployee();
+    		return "remove em false";
+    	}	
     }
 
     protected static String pushInformation(){
        /* Code to implement information command goes here:
            Compute key information on the state of the employee database
        */
+    	return EmployeeDB.printEmployee();
     }
 
     protected static String pushList(){
        /* Code to implement list command goes here:
           List the current contents of the employee database
        */
+    	return EmployeeDB.printEmployee();
     }
 
     // The pushHelp method may be used as is:

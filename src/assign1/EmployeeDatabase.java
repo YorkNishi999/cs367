@@ -20,6 +20,27 @@ public class EmployeeDatabase {
 //	}
 
 	// methods
+	public String printEmployee() {
+		List<String> wi = new ArrayList<String>();
+		String res = "";
+		
+		for ( int i = 0; i < edb.size(); ++i ) {
+			System.out.println(edb.get(i).getUsername()); // getUsernameがただしい？
+			res += edb.get(i).getUsername();
+			res += ": ";
+			wi = edb.get(i).getWishlist();
+			for (int j = 0; j < wi.size(); ++j) {
+				System.out.print(wi.get(j) + ",");
+				res += wi.get(j) + ",";
+			}
+			System.out.print("\n");
+			res += "\n";
+		}
+		
+		return res;
+	} // end of printEmployee
+	
+	
 	public void addEmployee(String e) {
 		// 与えられたユーザ名 e を持つ従業員をデータベースの最後に追加します。
 		// もし、ユーザ名eの従業員がすでにデータベースに存在する場合は、
@@ -36,7 +57,7 @@ public class EmployeeDatabase {
 				return;
 			}
 		}
-		edb.add(edb.size(), em);
+		edb.add(em);
 		return;
 	} // end of addEmployee
 	
@@ -61,10 +82,11 @@ public class EmployeeDatabase {
 		// 6. No＞最後に追加する
 		
 		for ( int i = 0; i < edb.size(); ++i ) {
-			if ( edb.get(i).getUsername() == e ) {
+//			System.out.println(edb.get(i).getUsername()); // getUsernameがただしい？
+			if ( edb.get(i).getUsername().equals(e) ) {
 				wi = edb.get(i).getWishlist();
 				for (int j = 0; j < wi.size(); ++j) {
-					if(wi.get(j) == d) {
+					if(wi.get(j).equals(d)) {
 						// Do nothing
 						return;
 					}
@@ -72,6 +94,7 @@ public class EmployeeDatabase {
 				wi.add(d);
 				return;
 			}
+//			System.out.println(edb.get(i).getWishlist());
 		}
 		throw new java.lang.IllegalArgumentException();
 		
@@ -84,6 +107,7 @@ public class EmployeeDatabase {
 		}
 		for ( int i = 0; i < edb.size(); ++i ) {
 			if ( edb.get(i).getUsername().equals(e) ) {
+				System.out.println(i);
 				return true;
 			}
 		}
@@ -97,16 +121,22 @@ public class EmployeeDatabase {
 			throw new java.lang.IllegalArgumentException();
 		}
 		
-		System.out.println("contains function called");
+		System.out.println("contains function 	called");
+		
+		List<String> wi = new ArrayList<String>();
 		
 		for ( int i = 0; i < edb.size(); ++i ) {
-			for (int j = 0; j < edb.get(i).getWishlist().size(); ++j) {
-				if(edb.get(i).getWishlist().get(j) == d) {
-					return true;
+				wi = edb.get(i).getWishlist();
+				for (int j = 0; j < wi.size(); ++j) {
+					System.out.println("koko " + wi.get(j));
+					if(wi.get(j).equals(d)) { // この書き方はオブジェクト指向特徴やな。。
+						System.out.println("koko match " + wi.get(j));
+						return true;
+					}
 				}
-			}	
 		}
 		return false;
+		
 	} // end of containsDestination
 		
 	boolean hasDestination(String e, String d) {
@@ -118,10 +148,10 @@ public class EmployeeDatabase {
 		List<String> wi = new ArrayList<String>();
 				
 		for ( int i = 0; i < edb.size(); ++i ) {
-			if ( edb.get(i).getUsername() == e ) {
+			if ( edb.get(i).getUsername().equals(e) ) {
 				wi = edb.get(i).getWishlist();
 				for (int j = 0; j < wi.size(); ++j) {
-					if(wi.get(j) == d) {
+					if(wi.get(j).equals(d)) {
 						return true;
 					}
 				}
@@ -142,7 +172,7 @@ public class EmployeeDatabase {
 		
 		for ( int i = 0; i < edb.size(); ++i ) {
 			for (int j = 0; j < edb.get(i).getWishlist().size(); ++j) {
-				if(edb.get(i).getWishlist().get(j) == d) {
+				if(edb.get(i).getWishlist().get(j).equals(d)) {
 					res.add(edb.get(i).getUsername());
 				}
 			}	
@@ -161,7 +191,7 @@ public class EmployeeDatabase {
 		List<String> res = new ArrayList<String>();
 		
 		for ( int i = 0; i < edb.size(); ++i ) {
-			if ( edb.get(i).getUsername() == e ) {
+			if ( edb.get(i).getUsername().equals(e) ) {
 				res = edb.get(i).getWishlist();
 			}
 		}
@@ -187,14 +217,18 @@ public class EmployeeDatabase {
 		// データベースから従業員eを削除します。従業員eがデータベースに存
 		// しない場合は、falseを返し、そうでない場合（つまり、削除が成功した
 		// 場合）は、trueを返します。
+		Iterator<Employee> item = edb.iterator();
 		
 		if (e == null) {
 			throw new java.lang.IllegalArgumentException();
 		}
 		
-		while (edb.iterator().hasNext()) {
-			if (edb.iterator().next().getUsername() == e) {
-				edb.iterator().remove();
+		System.out.println(iterator().next());
+		
+		while ( item.hasNext()) {
+			if ( item.next().getUsername().equals(e)) {
+				System.out.println("iterator work");
+				item.remove();
 				return true;
 			}
 		}
@@ -206,7 +240,8 @@ public class EmployeeDatabase {
 		// ウィッシュリストから目的地dを削除する。目的地dがデータベースに存在しな
 		// い場合はfalseを、そうでない場合（つまり削除が成功した場合）はtrueを返
 		// します。
-		// List<String> res = new ArrayList<String>();
+		
+		int count = 0; 
 		
 		if (d == null) {
 			throw new java.lang.IllegalArgumentException();
@@ -214,12 +249,18 @@ public class EmployeeDatabase {
 		
 		for ( int i = 0; i < edb.size(); ++i ) {
 			for (int j = 0; j < edb.get(i).getWishlist().size(); ++j) {
-				if(edb.get(i).getWishlist().get(j) == d) {
-					return edb.get(i).getWishlist().remove(d);
+				if(edb.get(i).getWishlist().get(j).equals(d)) {
+					String a = edb.get(i).getWishlist().get(j);
+					System.out.println(a);
+					edb.get(i).getWishlist().remove(d);
+					++count;
 				}
 			}	
 		}
-		return false;
+		if (count > 0)
+			return true;
+		else
+			return false;
 		
 	} // end of removeDestination
 	
