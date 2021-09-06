@@ -12,22 +12,6 @@ public class DLinkedList<E> implements ListADT<E>{
 		tail = head;
 		numItem = 0;
 	}
-	
-	
-//	private int nth(DblListnode item) {
-//		
-//		int counter = 0;
-//		
-//		if (item.getPrev() == null) {
-//			return counter;
-//		} else {
-//			while (item.getNext() == null) {
-//				counter++;
-//			}
-//			return counter;
-//		}	
-//	} // 
-
 
 		@Override
 		public void add(E item) {
@@ -69,35 +53,72 @@ public class DLinkedList<E> implements ListADT<E>{
 		@Override
 		public boolean contains(E item) {
 			// TODO Auto-generated method stub
+			if (item == null)
+				throw new IllegalArgumentException();
+			
+			DblListnode<E> n = new DblListnode(item);
+			DblListnode<E> index = head;
+			
+			for (int i = 0; i < numItem; ++i) {
+				index = index.getNext();
+				if (index.getData().equals(n.getData())) {
+					return true;
+				}
+			}
 			return false;
-		}
+		} // end of contains
 
 		@Override
 		public E get(int pos) {
 			// TODO Auto-generated method stub
-			return null;
+			DblListnode<E> index = head;
+			
+			if (pos > numItem || pos < 0) {
+				return null;
+			}
+			
+			for (int i = 0; i <= pos; ++i) {
+				index = index.getNext();
+			}
+			return (E) index;
 		}
 
-		
 
 		@Override
 		public boolean isEmpty() {
 			// TODO Auto-generated method stub
-			return false;
+			if (numItem > 0) 
+				return true;
+			else 
+				return false;
 		}
 
 
 		@Override
 		public E remove(int pos) {
+			
+			DblListnode<E> index = head;
+
 			// TODO Auto-generated method stub
-			return null;
+			for (int i = 0; i < pos; ++i) {
+				index = index.getNext();
+			}
+			DblListnode<E> prevIndex = index.getPrev();
+			DblListnode<E> nextIndex = index.getNext();
+			
+			prevIndex.setNext(nextIndex);
+			nextIndex.setPrev(prevIndex);
+			numItem--;
+			
+			return index.getData();		
+			
 		}
 
 
 		@Override
 		public int size() {
 			// TODO Auto-generated method stub
-			return 0;
+			return numItem;
 		}
 
 

@@ -28,6 +28,7 @@ public class Machine {
      * @return the machineName
      */
     public String getName() {
+    	return this.machineName;
     }
 
     /**                
@@ -35,6 +36,7 @@ public class Machine {
      * @return the numCPUs
      */                
     public int getCPUs() {
+    	return this.numCPUs;
     }   
     
     /**                
@@ -42,6 +44,7 @@ public class Machine {
      * @return the memorySize
      */                
     public int getMemorySize() {
+    	return this.memorySize;
     }     
 
    /**                       
@@ -49,6 +52,7 @@ public class Machine {
      * @return the diskSize 
      */                       
     public int getDiskSize() {
+    	return this.diskSize;
     }      
     
     /** 
@@ -56,6 +60,7 @@ public class Machine {
      * @return the price
      */
     public double getPrice() {
+    	return this.price;
     }
     
     /** 
@@ -67,6 +72,8 @@ public class Machine {
      * @return the string
      */
     public String toString() {
+    	return this.getName() + " [Number of CPU's: " + Integer.toString(this.numCPUs) + ", RAM size: " + Integer.toString(this.getMemorySize());
+    	
     }
 
 }
