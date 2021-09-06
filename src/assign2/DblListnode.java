@@ -10,7 +10,7 @@ package assign2;
 class DblListnode<E> {
 	private DblListnode<E> prev;   // connection to previous node
 	private E data;                // data to be stored 
-	private DblListnode<E> next;   // connnection to next node
+	private DblListnode<E> next;   // connection to next node
 
 	/**
 	 * Constructs a new list nodes with no links to neighboring nodes.

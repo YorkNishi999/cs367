@@ -14,8 +14,7 @@ import javax.swing.*;
  ********************************/
 public class ImageLoopEditor {
 
-	protected static LoopADT<Image> loop = new LinkedLoop<Image>();
-
+	protected static LoopADT<Image> loop = new LinkedLoop<Image>(); // object loop が作られた　
 
 
    // Methods that implement the GUI buttons' actions

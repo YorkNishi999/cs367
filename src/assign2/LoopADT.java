@@ -68,4 +68,7 @@ public interface LoopADT<E> {
      * @return an iterator for this Loop
      */
     Iterator<E> iterator();
-}
+    
+  
+} // end of interface
+
