@@ -6,6 +6,8 @@ public class ArrayHeap<E extends Prioritizable> implements PriorityQueueADT<E> {
 
     // default number of items the heap can hold before expanding
     private static final int INIT_SIZE = 100;
+    private E[] items;
+    private int numItems;
 
     // TO DO:
     //
@@ -20,14 +22,35 @@ public class ArrayHeap<E extends Prioritizable> implements PriorityQueueADT<E> {
     //
     // Add your code to implement the PriorityQueue ADT operations using a
     // heap whose underlying data structure is an array.
+    
+    // constructor
+    public ArrayHeap() {
+    	this(INIT_SIZE);
+    }
+    
+    public ArrayHeap(int size) {
+    	if (size < 0)
+    		throw new IllegalArgumentException();
+    	items = (E[])(new Prioritizable[size + 1]);
+    	numItems = 0;
+    }
 
 
     public boolean isEmpty() {
-        return false;  // replace this stub with your code
+    	return numItems ==0;
     }
 
     public void insert(E item) {
         // add your code
+    	if (item == null)
+    		throw new IllegalArgumentException();
+    	
+    	if (items.length == numItems + 1)
+    		expandArray();
+    
+    	int newIndex = numItems + 1;		// set index for new item
+    	items[newIndex] = item;				// add item to the end of array
+    	int parentIndex = newIndex / 2;		// set index of item's parent
     }
 
     public E removeMax() {

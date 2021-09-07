@@ -1,8 +1,6 @@
 package assign3;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
-public class KeyWord {
+public class KeyWord implements Comparable<KeyWord>, Prioritizable {
 	
 	/*The KeyWord Class
 	 * The dictionary created from the input file will store KeyWord objects,
@@ -20,8 +18,16 @@ public class KeyWord {
 	 */
 	
 	// field
-	String key;
-	int wordCount;
+	private String key;
+	private int wordCount;
+	
+	
+	// constructor
+	public KeyWord(String key) {
+		this.key = key.toLowerCase();
+		this.wordCount = 0;
+	}
+	
 	
 	// method
 	String getKey() {
@@ -31,6 +37,33 @@ public class KeyWord {
 	int getWordCount() {
 		return this.wordCount;
 	}
+
+	public void incrementWordCount() {
+		wordCount++;
+	}
+	
+	@Override
+	public int getPriority() {
+		// TODO Auto-generated method stub
+		return this.wordCount;
+	}
+
+	@Override
+	public int compareTo(KeyWord o) {
+		// TODO Auto-generated method stub
+		return this.getKey().compareTo(o.getKey());
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		if(o != null && this.getKey().equals(o)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	
 	
 

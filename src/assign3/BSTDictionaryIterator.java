@@ -9,6 +9,9 @@ import java.util.*;
  */
 public class BSTDictionaryIterator<K> implements Iterator<K> {
 
+
+	private Stack<BSTnode<K>> nodes;
+	
     // TO DO:
     //
     // Add your code to implement the BSTDictionaryIterator.  To receive full
@@ -21,17 +24,50 @@ public class BSTDictionaryIterator<K> implements Iterator<K> {
     // to next() returns the value in the node with the smallest key.
     // (You can use the Java API Stack or implement your own Stack - if you
     // implement your own, make sure to hand it in.)
+	
+	// constructor
+	BSTDictionaryIterator(BSTnode<K> root) { 
+		nodes = new Stack<BSTnode<K>>();
+		if (root == null) {
+			return;
+		}
+		
+		BSTnode<K> n = root;
+		nodes.push(n);
+		
+		// while there exist left, psu them onto the stack.
+		while(n.getLeft() != null) {
+			nodes.push(n.getLeft());
+			n = n.getLeft();
+		}
+	}
 
     public boolean hasNext() {
-        return false;  // replace this stub with your code
+       return nodes.isEmpty() == false;
     }
 
     public K next() {
-        return null;  // replace this stub with your code
+    	if (hasNext() == false) {
+    		throw new NoSuchElementException();
+    	}
+    
+	    BSTnode<K> next = nodes.pop();
+	    // if there is the right child, push it onto the stack
+	    // then push the line of all left children onto the stack
+	    if (next.getRight() != null) {
+	    	BSTnode<K> n = next.getRight();
+	    	nodes.push(n);
+	    	while(n.getLeft() != null) {
+	    		nodes.push(n.getLeft());
+	    		n = n.getLeft();
+	    	}
+	    }
+    return next.getKey();
+     // end of next
     }
-
+    
     public void remove() {
         // DO NOT CHANGE: you do not need to implement this method
         throw new UnsupportedOperationException();
     }    
-}
+} // end of class
