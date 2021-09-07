@@ -63,7 +63,16 @@ public class KeyWord implements Comparable<KeyWord>, Prioritizable {
 			return false;
 		}
 	}
+
+
+	public void increment() {
+		// TODO Auto-generated method stub
+		wordCount--;
+	}
 	
+    public int getOccurrences() {
+        return wordCount;
+    }
 	
 	
 
